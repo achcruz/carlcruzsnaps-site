@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   margin: 0;
   background: #fff;
@@ -10,12 +14,12 @@ body {
 }
 
 .site-header {
-  height: 126px;
+  min-height: 126px;
   display: flex;
   align-items: center;
   gap: 42px;
-  padding: 0 54px;
-  box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+  padding: 28px 54px;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.16);
   position: sticky;
   top: 0;
   background: #fff;
@@ -25,7 +29,7 @@ body {
 .brand {
   color: #000;
   text-decoration: none;
-  font-size: 42px;
+  font-size: clamp(2rem, 3vw, 2.65rem);
   font-weight: 800;
   letter-spacing: -1px;
 }
@@ -42,20 +46,174 @@ body {
   text-decoration: none;
 }
 
-.nav a:hover {
+.nav a:hover,
+.nav a.active {
   text-decoration: underline;
+  text-underline-offset: 9px;
 }
 
 .instagram {
   margin-left: auto;
+}
+
+/* Shared content containers */
+.recipe-list,
+.recipe-page,
+.page {
+  width: min(100% - 48px, 900px);
+  margin: 0 auto;
+  padding: 54px 0 84px;
+}
+
+.eyebrow {
+  margin: 0 0 42px;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.eyebrow.small {
+  margin-bottom: 10px;
+}
+
+/* Recipe index */
+.recipe-list h1 {
+  margin: 0 0 20px;
+  font-size: clamp(2.7rem, 7vw, 4rem);
+  line-height: 1.03;
+  letter-spacing: -1.5px;
+}
+
+.intro {
+  max-width: 720px;
+  margin: 0 0 44px;
+  font-size: 21px;
+  line-height: 1.55;
+}
+
+.recipe-card {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  padding: 30px 0;
+  border-top: 1px solid #111;
+  border-bottom: 1px solid #111;
+  color: #111;
+  text-decoration: none;
 }
 
-.instagram svg {
-  fill: currentColor;
+.recipe-card:visited {
+  color: #111;
 }
 
+.recipe-card h2 {
+  margin: 0 0 10px;
+  font-size: clamp(2.25rem, 6vw, 3rem);
+  line-height: 1.05;
+}
+
+.recipe-card p {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.45;
+}
+
+.recipe-card > span {
+  flex: 0 0 auto;
+  font-size: 18px;
+  white-space: nowrap;
+}
+
+/* Individual recipe */
+.recipe-page h1 {
+  margin: 0 0 62px;
+  font-size: clamp(4rem, 10vw, 5.5rem);
+  line-height: 0.96;
+  letter-spacing: -3px;
+}
+
+.recipe-copy {
+  margin-bottom: 50px;
+  font-size: 21px;
+  line-height: 1.65;
+}
+
+.recipe-copy p {
+  margin: 0 0 24px;
+}
+
+.sample-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 48px 0 68px;
+}
+
+.sample-grid img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: #eee;
+}
+
+hr {
+  margin: 0 0 52px;
+  border: 0;
+  border-top: 1px solid #111;
+}
+
+.settings h2 {
+  margin: 0 0 20px;
+  font-size: 25px;
+}
+
+.settings ul {
+  margin: 0;
+  padding-left: 28px;
+  font-size: 20px;
+  line-height: 1.65;
+}
+
+/* About */
+.about-page {
+  padding: 70px 54px 80px;
+}
+
+.about-card {
+  max-width: 1380px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  background: #f5f5f5;
+}
+
+.about-copy {
+  padding: 82px 72px;
+}
+
+.about-copy h1 {
+  margin: 0 0 54px;
+  font-size: clamp(3rem, 6vw, 4rem);
+  line-height: 1;
+}
+
+.about-copy p {
+  max-width: 700px;
+  margin: 0 0 26px;
+  font-size: 22px;
+  line-height: 1.65;
+}
+
+.about-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 620px;
+  object-fit: cover;
+}
+
+/* Home gallery */
 .gallery {
   padding: 74px 54px 54px;
   display: grid;
@@ -64,10 +222,11 @@ body {
 }
 
 .gallery img {
+  display: block;
   width: 100%;
   height: 360px;
   object-fit: cover;
-  display: block;
+  background: #f1f1f1;
 }
 
 .gallery img.wide {
@@ -75,31 +234,133 @@ body {
   height: 560px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 700px) {
   .site-header {
-    height: auto;
-    padding: 28px 24px;
-    flex-wrap: wrap;
-    gap: 18px 28px;
+    min-height: 0;
+    padding: 24px 22px 26px;
+    display: block;
+    position: static;
   }
 
   .brand {
-    font-size: 34px;
-    width: 100%;
+    display: block;
+    margin-bottom: 24px;
+    font-size: 2.45rem;
+    line-height: 1;
   }
 
   .nav {
+    gap: 28px;
+    font-size: 18px;
+    overflow-x: auto;
+  }
+
+  .nav a:hover,
+  .nav a.active {
+    text-underline-offset: 6px;
+  }
+
+  .instagram {
+    display: none;
+  }
+
+  .recipe-list,
+  .recipe-page,
+  .page {
+    width: auto;
+    margin: 0;
+    padding: 38px 22px 64px;
+  }
+
+  .eyebrow {
+    margin-bottom: 30px;
+    font-size: 16px;
+  }
+
+  .recipe-list h1 {
+    margin-bottom: 18px;
+    font-size: 2.7rem;
+    line-height: 1.02;
+  }
+
+  .intro {
+    margin-bottom: 34px;
     font-size: 18px;
   }
 
+  .recipe-card {
+    display: block;
+    padding: 26px 0;
+  }
+
+  .recipe-card h2 {
+    font-size: 2.35rem;
+  }
+
+  .recipe-card p {
+    font-size: 17px;
+  }
+
+  .recipe-card > span {
+    display: inline-block;
+    margin-top: 22px;
+    font-size: 17px;
+  }
+
+  .recipe-page h1 {
+    margin-bottom: 42px;
+    font-size: 4rem;
+  }
+
+  .recipe-copy {
+    font-size: 18px;
+  }
+
+  .sample-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin: 38px 0 50px;
+  }
+
+  .settings ul {
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  .about-page {
+    padding: 34px 18px 56px;
+  }
+
+  .about-card {
+    grid-template-columns: 1fr;
+  }
+
+  .about-copy {
+    padding: 40px 28px;
+  }
+
+  .about-copy h1 {
+    margin-bottom: 30px;
+    font-size: 2.8rem;
+  }
+
+  .about-copy p {
+    font-size: 18px;
+  }
+
+  .about-photo img {
+    min-height: 0;
+    height: auto;
+  }
+
   .gallery {
-    padding: 36px 18px;
+    padding: 34px 18px;
     grid-template-columns: 1fr;
   }
 
   .gallery img,
   .gallery img.wide {
-    grid-column: span 1;
+    grid-column: auto;
     height: auto;
   }
 }
